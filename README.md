@@ -1,3 +1,4 @@
+
 # Configurações de Ambiente
 
 ```
@@ -97,3 +98,4 @@ Tabelas do shield criadas
 | `loggedIn()` | Verifica se o token de API é válido. | `if ($auth->loggedIn()) { ... }` | `/Shield/Auth/Authenticators/Token.php` |
 
 * * * * *
+
