@@ -4,13 +4,12 @@
 <?= $this->include('components/alunos/modal_importar_aluno', ['turmas' => $turmas]) ?>
 
 <?php
+$breadcrumbOutput = '';
 $breadcrumbItems = [
     ['title' => 'Início', 'url' => '/'],
     ['title' => 'Cadastros', 'url' => null],
     ['title' => 'Alunos', 'url' => null]
 ];
-
-$breadcrumbOutput = '';
 foreach ($breadcrumbItems as $index => $item) {
     if (!empty($item['url'])) {
         $breadcrumbOutput .= '<a href="' . $item['url'] . '">' . $item['title'] . '</a>';

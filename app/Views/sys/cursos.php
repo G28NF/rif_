@@ -4,13 +4,13 @@
 <?php echo view('components/cursos/modal_confirmar_senha_curso') ?>
 
 <<?php
+$breadcrumbOutput = '';
 $breadcrumbItems = [
     ['title' => 'Início', 'url' => '/'],
     ['title' => 'Cadastros', 'url' => null],
     ['title' => 'Cursos', 'url' => null]
 ];
 
-$breadcrumbOutput = '';
 foreach ($breadcrumbItems as $index => $item) {
     if (!empty($item['url'])) {
         $breadcrumbOutput .= '<a href="' . $item['url'] . '">' . $item['title'] . '</a>';

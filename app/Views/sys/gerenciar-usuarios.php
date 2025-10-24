@@ -4,13 +4,13 @@
 <?php echo view('components/gerenciamento-usuarios/modal-atualizar-usuario.php'); ?>
 
 <?php
+$breadcrumbOutput = '';
 $breadcrumbItems = [
     ['title' => 'Início', 'url' => '/'],
     ['title' => 'Avançado', 'url' => null],
     ['title' => 'Gerenciamento de Usuários', 'url' => null]
 ];
 
-$breadcrumbOutput = '';
 foreach ($breadcrumbItems as $index => $item) {
     if (!empty($item['url'])) {
         $breadcrumbOutput .= '<a href="' . $item['url'] . '">' . $item['title'] . '</a>';

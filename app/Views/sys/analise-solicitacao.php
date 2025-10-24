@@ -1,11 +1,11 @@
 <?php
+$breadcrumbOutput = '';
 $breadcrumbItems = [
     ['title' => 'Início', 'url' => '/'],
     ['title' => 'Gestão de Refeições', 'url' => null],
     ['title' => 'Agendamento', 'url' => null]
 ];
 
-$breadcrumbOutput = '';
 foreach ($breadcrumbItems as $index => $item) {
     if (!empty($item['url'])) {
         $breadcrumbOutput .= '<a href="' . $item['url'] . '">' . $item['title'] . '</a>';
