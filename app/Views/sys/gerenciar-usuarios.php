@@ -3,6 +3,45 @@
 <?php echo view('components/gerenciamento-usuarios/modal-alterar-grupo.php'); ?>
 <?php echo view('components/gerenciamento-usuarios/modal-atualizar-usuario.php'); ?>
 
+<?php
+$breadcrumbOutput = '';
+$breadcrumbItems = [
+    ['title' => 'Início', 'url' => '/'],
+    ['title' => 'Avançado', 'url' => null],
+    ['title' => 'Gerenciamento de Usuários', 'url' => null]
+];
+
+foreach ($breadcrumbItems as $index => $item) {
+    if (!empty($item['url'])) {
+        $breadcrumbOutput .= '<a href="' . $item['url'] . '">' . $item['title'] . '</a>';
+    } else {
+        $breadcrumbOutput .= $item['title'];
+    }
+
+    if ($index < count($breadcrumbItems) - 1) {
+        $breadcrumbOutput .= ' / ';
+    }
+}
+?>
+
+<nav class="breadcrumb-custom">
+    <?= $breadcrumbOutput ?>
+</nav>
+
+<style>
+.breadcrumb-custom {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.breadcrumb-custom a {
+    text-decoration: none;
+    color: #007bff;
+}
+</style>
+
+
+
 <div class="mb-3">
     <h2 class="card-title mb-0">Gerenciamento de Usuários</h2>
 </div>

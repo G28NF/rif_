@@ -3,6 +3,7 @@
 <?php echo view('components/solicitacoes/modal_deletar_solicitacao') ?>
 
 
+
 <div class="mb-3">
     <h2 class="card-title mb-0">Solicitações de Refeições</h2>
 </div>

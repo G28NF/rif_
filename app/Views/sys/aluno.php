@@ -3,9 +3,44 @@
 <?= $this->include('components/alunos/modal_edit_aluno', ['turmas' => $turmas]) ?>
 <?= $this->include('components/alunos/modal_importar_aluno', ['turmas' => $turmas]) ?>
 
+<?php
+$breadcrumbOutput = '';
+$breadcrumbItems = [
+    ['title' => 'Início', 'url' => '/'],
+    ['title' => 'Cadastros', 'url' => null],
+    ['title' => 'Alunos', 'url' => null]
+];
+foreach ($breadcrumbItems as $index => $item) {
+    if (!empty($item['url'])) {
+        $breadcrumbOutput .= '<a href="' . $item['url'] . '">' . $item['title'] . '</a>';
+    } else {
+        $breadcrumbOutput .= $item['title'];
+    }
+
+    if ($index < count($breadcrumbItems) - 1) {
+        $breadcrumbOutput .= ' / ';
+    }
+}
+?>
+
+<nav class="breadcrumb-custom">
+    <?= $breadcrumbOutput ?>
+</nav>
+
+<style>
+.breadcrumb-custom {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.breadcrumb-custom a {
+    text-decoration: none;
+    color: #007bff;
+}
+</style>
 
 
-<div class="mb-3">
+
     <h2 class="card-title mb-0">Alunos</h2>
 </div>
 <div class="row">

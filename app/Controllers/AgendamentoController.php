@@ -8,18 +8,20 @@ use App\Models\AlunoTelefoneModel;
 use App\Models\EnviarMensagensModel;
 use App\Models\ControleRefeicoesModel;
 
+
+
 class AgendamentoController extends BaseController
 {
     public function index()
     {
         $controleModel = new ControleRefeicoesModel();
         $data = $controleModel->getViewData(new AlunoModel(), new TurmaModel());
-        
+
         $data['content'] = view('sys/agendamento', $data);
         return view('dashboard', $data);
     }
 
-    
+
     public function create()
     {
         $this->response->setContentType('application/json');
@@ -38,7 +40,7 @@ class AgendamentoController extends BaseController
 
             if (empty($matriculas) || empty($datasString)) {
                 return $this->response->setJSON([
-                    'success' => false, 
+                    'success' => false,
                     'message' => 'Selecione pelo menos um aluno e uma data.'
                 ]);
             }
@@ -47,23 +49,6 @@ class AgendamentoController extends BaseController
             $datas      = explode(',', $datasString);
 
             $controleModel = new ControleRefeicoesModel();
-
-        foreach ($matriculas as $matricula) {
-            foreach ($datas as $data) {
-                $existe = $controleModel
-                    ->where('aluno_id', $matricula)
-                    ->where('data_refeicao', $data)
-                    ->first();
-
-                if ($existe) {
-                    return $this->response->setJSON([
-                        'success' => false,
-                        'message' => "O aluno já possui agendamento no dia {$data}."
-                    ]);
-                }
-            }
-        }
-
             $inserido = $controleModel->createAgendamentos($matriculas, $datas, $status, $motivo);
 
             if ($inserido) {
@@ -72,7 +57,6 @@ class AgendamentoController extends BaseController
             }
 
             return $this->response->setJSON(['success' => (bool) $inserido]);
-
         } catch (\Exception $e) {
             log_message('error', '[AgendamentoController] Erro em create: ' . $e->getMessage());
 
@@ -105,22 +89,6 @@ class AgendamentoController extends BaseController
         }
 
         $controleModel = new ControleRefeicoesModel();
-
-        foreach ($newMatriculas as $matricula) {
-             foreach ($newDatas as $data) {
-                 $existe = $controleModel
-                ->where('aluno_id', $matricula)
-                ->where('data_refeicao', $data)
-                ->where('motivo !=', $originalMotivo)
-                ->first();
-
-        if ($existe) {
-            session()->setFlashdata('erros', ["O aluno já possui agendamento no dia."]);
-            return redirect()->back();
-        }
-    }
-}
-
         $sucesso = $controleModel->updateAgendamentos(
             $originalAlunoIds,
             $originalDatas,
@@ -179,7 +147,7 @@ class AgendamentoController extends BaseController
         return redirect()->back();
     }
 
-    
+
     public function getAlunosByTurma()
     {
         $alunoModel = new AlunoModel();
@@ -200,21 +168,21 @@ class AgendamentoController extends BaseController
 
     public function createSendMessages(array $matriculas, array $datasSelecionadas)
     {
-        $alunoModel = new AlunoModel(); 
+        $alunoModel = new AlunoModel();
         $alunoTelefoneModel = new AlunoTelefoneModel();
         $enviarMensagensModel = new EnviarMensagensModel();
-        
+
         foreach ($matriculas as $matricula) {
             try {
                 $aluno = $alunoModel->find($matricula);
                 $telefoneAluno = $alunoTelefoneModel->getTelefoneAtivoByAlunoId($matricula);
-            
+
                 if ($aluno && $telefoneAluno) {
                     foreach ($datasSelecionadas as $dataRefeicao) {
-                        
+
                         $nomeAluno = $aluno['nome'];
                         //$destinatario = $telefoneAluno['telefone'];
-                        $destinatario = '69992809488'; 
+                        $destinatario = '69992809488';
 
                         $mensagem = "Prezado(o) {$nomeAluno}\n";
                         $mensagem .= "Confirme sua refeição para o dia {$dataRefeicao}\n";
@@ -229,7 +197,6 @@ class AgendamentoController extends BaseController
                         ]);
                     }
                 }
-
             } catch (\Exception $e) {
                 log_message('error', "[AgendamentoController] Falha ao criar mensagem para matrícula {$matricula}: " . $e->getMessage());
             }

@@ -3,6 +3,45 @@
 <?php echo view('components/cursos/modal_deletar_curso') ?>
 <?php echo view('components/cursos/modal_confirmar_senha_curso') ?>
 
+<<?php
+$breadcrumbOutput = '';
+$breadcrumbItems = [
+    ['title' => 'Início', 'url' => '/'],
+    ['title' => 'Cadastros', 'url' => null],
+    ['title' => 'Cursos', 'url' => null]
+];
+
+foreach ($breadcrumbItems as $index => $item) {
+    if (!empty($item['url'])) {
+        $breadcrumbOutput .= '<a href="' . $item['url'] . '">' . $item['title'] . '</a>';
+    } else {
+        $breadcrumbOutput .= $item['title'];
+    }
+
+    if ($index < count($breadcrumbItems) - 1) {
+        $breadcrumbOutput .= ' / ';
+    }
+}
+?>
+
+<nav class="breadcrumb-custom">
+    <?= $breadcrumbOutput ?>
+</nav>
+
+<style>
+.breadcrumb-custom {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.breadcrumb-custom a {
+    text-decoration: none;
+    color: #007bff;
+}
+</style>
+
+
+
 <div class="mb-3">
     <h2 class="card-title mb-0">Cursos</h2>
 </div>

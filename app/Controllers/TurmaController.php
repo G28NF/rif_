@@ -37,7 +37,6 @@ class TurmaController extends BaseController
     {
         $post = $this->request->getPost();
 
-        $input['codTurma'] = strip_tags($post['codigo']);
         $input['nome'] = strip_tags($post['nome']);
         $input['curso_id'] = (int) strip_tags($post['curso_id']);
 
@@ -64,7 +63,6 @@ class TurmaController extends BaseController
         $post = $this->request->getPost();
 
         $input['id'] = (int) strip_tags($post['id']);
-        $input['codTurma'] = strip_tags($post['codTurma']);
         $input['nome'] = strip_tags($post['nome']);
         $input['curso_id'] = (int) strip_tags($post['curso_id']);
 

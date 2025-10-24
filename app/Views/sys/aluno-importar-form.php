@@ -1,3 +1,5 @@
+
+
 <div>
     <h1>Alunos Importados</h1>
 
@@ -25,7 +27,7 @@
                     <th>Matrícula</th>
                     <th>Nome</th>
                     <?php if (isset($import_completo) && $import_completo): ?>
-                        <th>Código Turma</th>
+                        <th>Email</th>
                         <th>Telefone</th>
                         <!-- <th>Turma</th> -->
                     <?php endif; ?>                    
@@ -51,8 +53,9 @@
                             <td><?= esc($aluno['matricula']) ?></td>
                             <td><?= esc($aluno['nome']) ?></td>
                             <?php if (isset($import_completo) && $import_completo): ?>
-                                <td><?= esc($aluno['cod_turma'] ?? '') ?></td>
+                                <td><?= esc(implode(', ', $aluno['email'])) ?></td>
                                 <td><?= esc(implode(', ', $aluno['telefone'])) ?></td>
+                                <!-- turma -->
                             <?php endif; ?>
                             <td><?= esc($aluno['status']) ?></td>
                         </tr>

@@ -4,6 +4,44 @@
 <?= $this->include('components/turmas/modal_importar_alunos_turma', ['cursos' => $cursos]) ?>
 <?= $this->include('components/turmas/modal_confirmar_senha') ?>
 
+<?php
+$breadcrumbOutput = '';
+$breadcrumbItems = [
+    ['title' => 'Início', 'url' => '/'],
+    ['title' => 'Cadastros', 'url' => null],
+    ['title' => 'Turmas', 'url' => null]
+];
+
+foreach ($breadcrumbItems as $index => $item) {
+    if (!empty($item['url'])) {
+        $breadcrumbOutput .= '<a href="' . $item['url'] . '">' . $item['title'] . '</a>';
+    } else {
+        $breadcrumbOutput .= $item['title'];
+    }
+
+    if ($index < count($breadcrumbItems) - 1) {
+        $breadcrumbOutput .= ' / ';
+    }
+}
+?>
+
+<nav class="breadcrumb-custom">
+    <?= $breadcrumbOutput ?>
+</nav>
+
+<style>
+.breadcrumb-custom {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.breadcrumb-custom a {
+    text-decoration: none;
+    color: #007bff;
+}
+</style>
+
+
 
 <div class="mb-3">
     <h2 class="card-title mb-0">Turmas</h2>
@@ -45,7 +83,6 @@
                         <thead>
                             <tr>
                                 <th style="width: 4%; min-width: 45px;"><strong>Id</strong></th>
-                                <th><strong>Código da Turma</strong></th>
                                 <th><strong>Nome</strong></th>
                                 <th><strong>Curso</strong></th>
                                 <th class="text-nowrap" style="text-align: center; width: 12%; min-width: 100px;"><strong>Ações</strong></th>
@@ -88,7 +125,6 @@
                 data: turmasData,
                 columns: [
                     { data: 'id' },
-                    { data: 'codTurma' },
                     { data: 'nome' },
                     { data: 'curso_nome' },
                     { 
@@ -103,7 +139,6 @@
                                             data-bs-toggle="modal"
                                             data-bs-target="#modal-editar-turma"
                                             data-id="${data.id}"
-                                            data-cod="${data.codTurma}"
                                             data-nome="${data.nome}"
                                             data-curso_id="${data.curso_id}">
                                             <i class="fa fa-edit"></i>

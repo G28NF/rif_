@@ -7,13 +7,12 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-$routes->get('/', 'Home::index', ['filter' => 'session']); 
+$routes->get('/', 'Home::index', ['filter' => 'session']);
 
 $routes->get('/teste', 'Home::teste');
 
 // Shield Auth routes
 service('auth')->routes($routes);
-
 
 // =================================================================================
 // GRUPO PRINCIPAL: Rotas protegidas. Exige que o usuário esteja logado.
@@ -40,7 +39,7 @@ $routes->group('sys', ['filter' => 'session'], static function ($routes) {
         $routes->post('update', 'TurmaController::update');
         $routes->post('delete', 'TurmaController::delete');
         $routes->post('import', 'TurmaController::import');
-        $routes->post('importProcess', 'TurmaController::importProcess'); 
+        $routes->post('importProcess', 'TurmaController::importProcess');
         $routes->get('verificarAlunos/(:num)', 'TurmaController::verificarAlunos/$1');
     });
 
@@ -63,14 +62,14 @@ $routes->group('sys', ['filter' => 'session'], static function ($routes) {
     $routes->group('alunos', ['filter' => 'app_group:admin,developer'], static function ($routes) {
         $routes->get('', 'AlunoController::index');
         $routes->post('create', 'AlunoController::create');
-        $routes->get('edit/(:any)', 'AlunoController::edit/$1'); 
+        $routes->get('edit/(:any)', 'AlunoController::edit/$1');
         $routes->put('update', 'AlunoController::update');
         $routes->delete('delete', 'AlunoController::delete');
         $routes->post('import', 'AlunoController::import');
         $routes->post('importProcess', 'AlunoController::importProcess');
-        
+
         //provisorio
-        $routes->get('sendEmail', 'AlunoController::enviarEmail'); 
+        $routes->get('sendEmail', 'AlunoController::enviarEmail');
     });
 
     //==============================================================
@@ -133,7 +132,7 @@ $routes->group('sys', ['filter' => 'session'], static function ($routes) {
     $routes->group('admin', ['filter' => 'app_group:admin'], static function ($routes) {
         $routes->get('/', 'AdminController::index'); // Página inicial da admin
         $routes->post('alterar-grupo', 'AdminController::alterarGrupoUsuario'); // Atribuir a um grupo de usuários
-        $routes->post('atualizar-usuario', 'AdminController::atualizarUsuario'); 
+        $routes->post('atualizar-usuario', 'AdminController::atualizarUsuario');
         $routes->post('resetar-senha', 'AdminController::resetarSenha'); // Atualizar senha
         $routes->post('desativar-usuario', 'AdminController::desativarUsuario');
         $routes->post('registrar-usuario', 'AdminController::registrarUsuario');
